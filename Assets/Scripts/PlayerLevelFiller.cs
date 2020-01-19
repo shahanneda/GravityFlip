@@ -31,9 +31,14 @@ public class PlayerLevelFiller : MonoBehaviour
     }
 
     private void GenerateNewLevel(){
-        Vector3 newLevelPos = transform.position;
+
+        Vector3 newLevelPos = getCurrentLevelEnd().transform.position;
+        Vector3 levelStartLocalPos = levelPrefabs.transform.Find("Level Start").localPosition;
+        newLevelPos = newLevelPos - levelStartLocalPos;
+
         GameObject newLevel = Instantiate(levelPrefabs, newLevelPos, Quaternion.identity, levelParent);
         currentLevel = newLevel;
+          
     }
 }
 
