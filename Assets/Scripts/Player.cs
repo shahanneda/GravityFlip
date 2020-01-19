@@ -36,6 +36,10 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
             Jump();
         }
+        if (Input.GetKeyDown(KeyCode.N))// TEMP
+        {
+            rigidbody.AddForce(new Vector3(1.0f * jumpForwardForce, 0, 0), ForceMode.Impulse);
+        }
     }
 
     void Jump(){

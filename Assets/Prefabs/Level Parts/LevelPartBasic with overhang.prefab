@@ -211,7 +211,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3478726333715451795}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1113ef583afaa422f98e7ce70c945f33, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -374,7 +374,7 @@ PrefabInstance:
     - target: {fileID: 8107606401307771201, guid: d8efba2be1def4f79a9bfcae8deb8e86,
         type: 3}
       propertyPath: m_Name
-      value: LevelPartBasic with obstacle
+      value: LevelPartBasic with overhang
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8efba2be1def4f79a9bfcae8deb8e86, type: 3}
