@@ -7,18 +7,21 @@ public class PlayerLevelFiller : MonoBehaviour
 
     public GameObject levelPrefabs;
     public Transform levelParent;
-
-    private GameObject currentLevel = null;
+    public int levelPrebuffNumber = 10;
+    private GameObject currentGenerationLevel = null;
 
 
     public void Start()
     {
         GameObject newLevel = Instantiate(levelPrefabs, transform.position, Quaternion.identity, levelParent);
-        currentLevel = newLevel;
+        currentGenerationLevel = newLevel;
+        for (int i = 0; i < levelPrebuffNumber; i++){
+            GenerateNewLevel();
+        }
     }
 
     private GameObject getCurrentLevelEnd(){
-        return currentLevel.transform.Find("Level End").gameObject;
+        return currentGenerationLevel.transform.Find("Level End").gameObject;
     }
     private void alignColliderWithLevelEnd(){
         transform.position = getCurrentLevelEnd().transform.position;
@@ -37,7 +40,7 @@ public class PlayerLevelFiller : MonoBehaviour
         newLevelPos = newLevelPos - levelStartLocalPos;
 
         GameObject newLevel = Instantiate(levelPrefabs, newLevelPos, Quaternion.identity, levelParent);
-        currentLevel = newLevel;
+        currentGenerationLevel = newLevel;
           
     }
 }
