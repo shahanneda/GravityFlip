@@ -42,7 +42,13 @@ public class PlayerLevelFiller : MonoBehaviour
             eachLevelPie.Add(new float[]{ eachLevelPie[i-1][1], (eachLevelPie[i-1][1] + levelPrefabs[i].probability) }); 
         }
 
+        //foreach(float[] pie in eachLevelPie)
+        //{
+        //    Debug.Log("[" + pie[0] + "," + pie[1] + "]");
+        //}
+
         float randomNum = Random.Range(1, 1000);
+        //Debug.Log("Random Number Picked: " + randomNum);
         int index = 0;
         for (int i = 0; i < eachLevelPie.Count; i++){
             if(randomNum >= eachLevelPie[i][0] && randomNum <= eachLevelPie[i][1]){
@@ -50,8 +56,6 @@ public class PlayerLevelFiller : MonoBehaviour
                 break;
             }
         }
-        print(index);
-
         return levelPrefabs[index].prefab;
     }
 
