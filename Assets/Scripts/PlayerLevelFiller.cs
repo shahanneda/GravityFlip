@@ -33,8 +33,26 @@ public class PlayerLevelFiller : MonoBehaviour
             GenerateRandomNewLevel();
         } 
     }
-    private GameObject PickRandomNewLevel(){
-        return levelPrefabs[Random.Range(0,levelPrefabs.Count)].prefab;
+    private GameObject PickRandomNewLevel(){//the idea behind this is to create a pie with all the probablities, then stack them up   and pick a random number
+        //if future optimization is needed this can be moved to the start as it only needs to be run once instead of every time
+        List<float[]> eachLevelPie = new List<float[]>();
+
+        eachLevelPie.Add(new float[] { 0, levelPrefabs[0].probability });
+        for (int i = 1; i < levelPrefabs.Count; i++){
+            eachLevelPie.Add(new float[]{ eachLevelPie[i-1][1], (eachLevelPie[i-1][1] + levelPrefabs[i].probability) }); 
+        }
+
+        float randomNum = Random.Range(1, 1000);
+        int index = 0;
+        for (int i = 0; i < eachLevelPie.Count; i++){
+            if(randomNum >= eachLevelPie[i][0] && randomNum <= eachLevelPie[i][1]){
+                index = i;
+                break;
+            }
+        }
+        print(index);
+
+        return levelPrefabs[index].prefab;
     }
 
     private void CreateNewLevel(GameObject levelPrefab){
