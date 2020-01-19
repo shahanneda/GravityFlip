@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +15,6 @@ public class PlayerLevelFiller : MonoBehaviour
     {
         GameObject newLevel = Instantiate(levelPrefabs[0].prefab, transform.position, Quaternion.identity, levelParent);
         currentGenerationLevel = newLevel;
-
         for (int i = 0; i < levelPrebuffNumber; i++)
         {
             GenerateRandomNewLevel();
@@ -32,7 +32,11 @@ public class PlayerLevelFiller : MonoBehaviour
         if(col.gameObject.name == "Level End"){
             GenerateRandomNewLevel();
         } 
+        if(col.gameObject.name == "Level Start"){
+        }
     }
+
+
     private GameObject PickRandomNewLevel(){//the idea behind this is to create a pie with all the probablities, then stack them up   and pick a random number
         //if future optimization is needed this can be moved to the start as it only needs to be run once instead of every time
         List<float[]> eachLevelPie = new List<float[]>();
@@ -47,7 +51,7 @@ public class PlayerLevelFiller : MonoBehaviour
         //    Debug.Log("[" + pie[0] + "," + pie[1] + "]");
         //}
 
-        float randomNum = Random.Range(1, 1000);
+        float randomNum = UnityEngine.Random.Range(1, 1000);
         //Debug.Log("Random Number Picked: " + randomNum);
         int index = 0;
         for (int i = 0; i < eachLevelPie.Count; i++){
