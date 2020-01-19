@@ -5,15 +5,14 @@ using UnityEngine;
 public class PlayerLevelFiller : MonoBehaviour
 {
 
-    public GameObject[] levelPrefabs;
     public Transform levelParent;
     public int levelPrebuffNumber = 10;
     private GameObject currentGenerationLevel = null;
-
+    public List<Level> levelPrefabs = new List<Level>();
 
     public void Start()
     {
-        GameObject newLevel = Instantiate(levelPrefabs[0], transform.position, Quaternion.identity, levelParent);
+        GameObject newLevel = Instantiate(levelPrefabs[0].prefab, transform.position, Quaternion.identity, levelParent);
         currentGenerationLevel = newLevel;
 
         for (int i = 0; i < levelPrebuffNumber; i++)
@@ -35,7 +34,7 @@ public class PlayerLevelFiller : MonoBehaviour
         } 
     }
     private GameObject PickRandomNewLevel(){
-        return levelPrefabs[Random.Range(0,levelPrefabs.Length)];
+        return levelPrefabs[Random.Range(0,levelPrefabs.Count)].prefab;
     }
 
     private void CreateNewLevel(GameObject levelPrefab){
