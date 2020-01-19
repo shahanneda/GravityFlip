@@ -714,7 +714,7 @@ MonoBehaviour:
     probability: 700
   - prefab: {fileID: 2759283758284453248, guid: b3003022c281e44c6b88f1f29bb584e4,
       type: 3}
-    probability: 100
+    probability: 10
   - prefab: {fileID: 6105986466811907178, guid: 6020c3530c13e4bb6988e856b068aed0,
       type: 3}
     probability: 100
@@ -732,8 +732,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 100, z: 4.99}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: -66.22, y: 100, z: 4.99}
+  m_Center: {x: 0, y: -47.13, z: 0}
 --- !u!1 &1806286001
 GameObject:
   m_ObjectHideFlags: 0
