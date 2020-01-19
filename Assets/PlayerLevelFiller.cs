@@ -5,18 +5,24 @@ using UnityEngine;
 public class PlayerLevelFiller : MonoBehaviour
 {
 
-    public GameObject
+    public GameObject levelPrefabs;
+    public Transform levelParent;
 
-    public GameObject levels; // array in futureh
-    // Start is called before the first frame update
-    void Start()
+    private GameObject currentLevel = null;
+
+
+    public void Start()
     {
-        
+        GameObject newLevel = Instantiate(levelPrefabs, transform.position, Quaternion.identity, levelParent);
+        currentLevel = newLevel;
+        alignColliderWithLevelEnd();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private GameObject getCurrentLevelEnd(){
+        return currentLevel.transform.Find("Level End").gameObject;
+    }
+    private void alignColliderWithLevelEnd(){
+        transform.position = getCurrentLevelEnd().transform.position;
     }
 }
+
