@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
         {
             rigidbody.AddForce(new Vector3(0, 0, CrossPlatformInputManager.GetAxis("Horizontal") *  -rightForce), ForceMode.Force);
         }
-        Debug.Log(CrossPlatformInputManager.GetAxis("Horizontal"));
         if (Input.GetKey(KeyCode.W)){
             rigidbody.AddForce(new Vector3(1.0f *forwardForce, 0, 0), ForceMode.Force);
         }
@@ -59,6 +58,11 @@ public class Player : MonoBehaviour
 
     void Jump(){
         rigidbody.AddForce(new Vector3(1.0f * jumpForwardForce, 1.0f * jumpUpForce, 0), ForceMode.Impulse);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("COLLIDED WITH: " + collision.collider.name);
     }
 
 }
