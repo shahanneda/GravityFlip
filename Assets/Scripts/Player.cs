@@ -9,6 +9,12 @@ public class Player : MonoBehaviour
     public float speedV = 10.0f;
     public float jumpUpForce = 10.0f;
     public float jumpForwardForce = 10.0f;
+
+    public float forwardForce = 0.01f;
+    public float backwardsForce = 0.01f;
+    public float rightForce = 0.01f;
+    public float leftForce = 0.01f;
+
     private Rigidbody rigidbody;
 
     void Start()
@@ -21,19 +27,19 @@ public class Player : MonoBehaviour
     {
 
         if (Input.GetKey(KeyCode.W)){
-            transform.Translate(new Vector3(1 * speedV * Time.deltaTime, 0, 0));
+            rigidbody.AddForce(new Vector3(1.0f *forwardForce, 0, 0), ForceMode.Force);
         }
-        if(Input.GetKey(KeyCode.S)){
-            transform.Translate(new Vector3(-1 * speedV * Time.deltaTime, 0, 0));
+        if (Input.GetKey(KeyCode.S)){
+            rigidbody.AddForce(new Vector3(-1.0f * backwardsForce, 0, 0), ForceMode.Force);
         }
-        if(Input.GetKey(KeyCode.D)){
-            transform.Translate(new Vector3(0, 0, -1 * speedH * Time.deltaTime));
+        if (Input.GetKey(KeyCode.D)){
+            rigidbody.AddForce(new Vector3(0, 0, -1.0f * rightForce), ForceMode.Force);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(new Vector3(0, 0, 1 * speedH * Time.deltaTime));
+            rigidbody.AddForce(new Vector3(0, 0, 1.0f * leftForce), ForceMode.Force);
         }
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if (Input.GetKeyDown(KeyCode.Space)){
             Jump();
         }
         if (Input.GetKeyDown(KeyCode.N))// TEMP
