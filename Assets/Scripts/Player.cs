@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour
 {
@@ -26,6 +27,14 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+        if(!CrossPlatformInputManager.GetAxis("Vertical").Equals(0)){
+            rigidbody.AddForce(new Vector3(CrossPlatformInputManager.GetAxis("Vertical") * forwardForce, 0, 0), ForceMode.Force);
+        }
+        if (!CrossPlatformInputManager.GetAxis("Horizontal").Equals(0))
+        {
+            rigidbody.AddForce(new Vector3(0, 0, CrossPlatformInputManager.GetAxis("Horizontal") *  -rightForce), ForceMode.Force);
+        }
+        Debug.Log(CrossPlatformInputManager.GetAxis("Horizontal"));
         if (Input.GetKey(KeyCode.W)){
             rigidbody.AddForce(new Vector3(1.0f *forwardForce, 0, 0), ForceMode.Force);
         }
@@ -39,7 +48,7 @@ public class Player : MonoBehaviour
         {
             rigidbody.AddForce(new Vector3(0, 0, 1.0f * leftForce), ForceMode.Force);
         }
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if (Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("Jump")){
             Jump();
         }
         if (Input.GetKeyDown(KeyCode.N))// TEMP
