@@ -15,7 +15,6 @@ public class PlayerLevelFiller : MonoBehaviour
     {
         GameObject newLevel = Instantiate(levelPrefabs, transform.position, Quaternion.identity, levelParent);
         currentLevel = newLevel;
-        alignColliderWithLevelEnd();
     }
 
     private GameObject getCurrentLevelEnd(){
@@ -23,6 +22,18 @@ public class PlayerLevelFiller : MonoBehaviour
     }
     private void alignColliderWithLevelEnd(){
         transform.position = getCurrentLevelEnd().transform.position;
+    }
+    public void OnTriggerEnter(Collider col)
+    {
+        if(col.gameObject.name == "Level End"){
+            GenerateNewLevel();
+        } 
+    }
+
+    private void GenerateNewLevel(){
+        Vector3 newLevelPos = transform.position;
+        GameObject newLevel = Instantiate(levelPrefabs, newLevelPos, Quaternion.identity, levelParent);
+        currentLevel = newLevel;
     }
 }
 
