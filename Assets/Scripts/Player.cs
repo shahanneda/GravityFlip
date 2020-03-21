@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     public float rightForce = 0.01f;
     public float leftForce = 0.01f;
 
+    public float maxForwardVelocity = 100f;
+
     private Rigidbody rigidbody;
 
     void Start()
@@ -26,14 +28,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //-- For Joystick control -- 
         if(!CrossPlatformInputManager.GetAxis("Vertical").Equals(0)){
             rigidbody.AddForce(new Vector3(CrossPlatformInputManager.GetAxis("Vertical") * forwardForce, 0, 0), ForceMode.Force);
         }
         if (!CrossPlatformInputManager.GetAxis("Horizontal").Equals(0))
         {
-            rigidbody.AddForce(new Vector3(0, 0, CrossPlatformInputManager.GetAxis("Horizontal") *  -rightForce), ForceMode.Force);
+            rigidbody.AddForce(new Vector3(0, 0, CrossPlatformInputManager.GetAxis("Horizontal") * -rightForce), ForceMode.Force);
         }
+        // --  for default movement --
+        if (rigidbody.velocity.x < maxForwardVelocity){
+            rigidbody.AddForce(new Vector3(1 * forwardForce, 0, 0), ForceMode.Force);
+        }
+
+        // -- for testing on a computer
         if (Input.GetKey(KeyCode.W)){
             rigidbody.AddForce(new Vector3(1.0f *forwardForce, 0, 0), ForceMode.Force);
         }
@@ -47,6 +55,7 @@ public class Player : MonoBehaviour
         {
             rigidbody.AddForce(new Vector3(0, 0, 1.0f * leftForce), ForceMode.Force);
         }
+
         if (Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("Jump")){
             Jump();
         }
