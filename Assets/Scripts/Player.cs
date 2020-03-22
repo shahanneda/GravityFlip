@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public float maxForwardVelocity = 100f;
 
     private Rigidbody rigidbody;
+    public float gyroTreshold = 0.1f;
+
 
     void Start()
     {
@@ -63,6 +65,15 @@ public class Player : MonoBehaviour
         {
             rigidbody.AddForce(new Vector3(1.0f * jumpForwardForce, 0, 0), ForceMode.Impulse);
         }
+
+        //  gyroscope control
+        if(Mathf.Abs(Input.acceleration.x  - gyroTreshold) > 0.1)
+        {
+            float direction = Input.acceleration.x > 0 ? 1 : -1;
+            rigidbody.AddForce(new Vector3(0, 0, direction * 1* -rightForce), ForceMode.Force);
+        }
+
+        print(Input.acceleration.ToString());
     }
 
     void Jump(){
